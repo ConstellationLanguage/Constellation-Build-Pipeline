@@ -4,3 +4,6 @@
 [submodule "Repositories/Constellation-Flappy-bird.git"]
 	path = Repositories/Constellation-Flappy-bird.git
 	url = ../Constellation-Flappy-bird.git
+[submodule "Repositories/symlink.bat.git"]
+	path = Repositories/symlink.bat.git
+	url = ../../JDeuce/symlink.bat.git
