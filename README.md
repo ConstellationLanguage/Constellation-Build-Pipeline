@@ -1,2 +1,2 @@
-# AssetStoreBuildPipeline
-Automatization of the asset store build pipeline
+Constellation-Build-Pipeline
+Automatization for releasing a new version of Constellation.
