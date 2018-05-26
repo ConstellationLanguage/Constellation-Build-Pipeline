@@ -7,3 +7,6 @@
 [submodule "Repositories/Constellation-Flappy-bird.git"]
 	path = Repositories/Constellation-Flappy-bird.git
 	url = ../Constellation-Flappy-bird.git
+[submodule "Repositories/ConstellationFlappyBird"]
+	path = Repositories/ConstellationFlappyBird
+	url = ../Constellation-Flappy-bird.git
