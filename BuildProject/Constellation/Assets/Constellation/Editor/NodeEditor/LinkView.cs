@@ -17,7 +17,7 @@ namespace ConstellationEditor {
             nodeConfig = _nodeConfig;
             OnLinkRemoved += _onLinkRemoved;
         }
-
+        
         public LinkData[] GetLinks () {
             return constellationScript.GetLinks ();
         }
@@ -34,6 +34,7 @@ namespace ConstellationEditor {
                                 node.YPosition + (nodeConfig.TopMargin * 0.5f) + ((nodeConfig.InputSize) * i),
                                 0,
                                 0);
+                            break;
                         }
                         i++;
                     }
@@ -50,6 +51,7 @@ namespace ConstellationEditor {
                                 node.YPosition + (nodeConfig.TopMargin * 0.5f) + ((nodeConfig.InputSize) * j),
                                 0,
                                 0);
+                            break;
                         }
                         j++;
                     }
@@ -58,32 +60,16 @@ namespace ConstellationEditor {
                     constellationScript.RemoveLink (link);
                     OnLinkRemoved (link);
                 }
-
-                link.outputPositionY = endLink.y;
-
-                var color = Color.gray;
-                if (link.Input.IsWarm == true) {
-                    if (link.Input.Type == "Object")
-                        color = nodeConfig.WarmInputObjectColor;
-                    else
-                        color = nodeConfig.WarmInputColor;
-                } else {
-                    if (link.Input.Type == "Object")
-                        color = nodeConfig.ColdInputObjectColor;
-                    else
-                        color = nodeConfig.ColdInputColor;
-                }
-
-                DrawNodeCurve (startLink, endLink, color);
+                
+                DrawNodeCurve (startLink, endLink, nodeConfig.GetConnectionColor(link.Input.IsWarm, link.Input.Type));
 
                 if (MouseOverCurve (startLink.position, endLink.position)) {
                     var linkCenter = new Rect ((startLink.x + (endLink.x - startLink.x) / 2) - (nodeConfig.TopMargin * 0.5f),
                         (startLink.y + (endLink.y - startLink.y) / 2) - (nodeConfig.TopMargin * 0.5f),
                         nodeConfig.LinkButtonSize,
                         nodeConfig.LinkButtonSize);
-
-                    GUI.Box (linkCenter, "", GUI.skin.GetStyle ("flow var 0"));
-                    if (GUI.Button (linkCenter, "", GUI.skin.GetStyle ("WinBtnClose"))) {
+                    GUI.Box (linkCenter, "", nodeConfig.HexagonButton);
+                    if (GUI.Button (linkCenter, "", nodeConfig.CloseButton)) {
                         constellationScript.RemoveLink (link);
                         OnLinkRemoved (link);
                     } else if (Event.current.IsUsed ()) {
@@ -180,9 +166,9 @@ namespace ConstellationEditor {
         private Rect PointsToRect (Vector3 start, Vector3 end) {
             return new Rect {
                 x = (start.x < end.x) ? start.x : end.x,
-                    y = (start.y < end.y) ? end.y : start.y,
-                    width = Mathf.Abs (start.x - end.x),
-                    height = Mathf.Abs (start.y - end.y)
+                y = (start.y < end.y) ? end.y : start.y,
+                width = Mathf.Abs (start.x - end.x),
+                height = Mathf.Abs (start.y - end.y)
             };
         }
     }
