@@ -21,7 +21,7 @@ Echo D | xcopy /e /s %~dp0Repositories\ConstellationMaster\Constellation\Assets\
 
 "C:\Program Files\Unity2017.4.2\Editor\Unity.exe" -quit -projectPath %~dp0BuildProject\Constellation -executeMethod BuildPackage.ExportPackage
 
-Echo D | xcopy /e /s %~dp0Repositories\AssetStoreTools\Editor %~dp0BuildProject\Constellation\Assets\Editor
+Echo D | xcopy /e /s %~dp0Repositories\AssetStoreTools %~dp0BuildProject\Constellation\Assets\AssetStoreTools
 
 "C:\Program Files\Unity2017.4.2\Editor\Unity.exe" -projectPath %~dp0BuildProject\Constellation
 
